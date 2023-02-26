@@ -85,9 +85,10 @@ class _LoginFormState extends State<LoginForm> {
                       initialValue: 'sophat.leat@nintrea.live',
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.fromLTRB(13, 10, 0, 12),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5))),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(13, 10, 0, 12),
+                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5),borderSide: const BorderSide(color: Color(0XFFC6C6C6))),
+                          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0XFFC6C6C6)))),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Email is required';
@@ -127,17 +128,20 @@ class _LoginFormState extends State<LoginForm> {
                       obscureText: true,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.fromLTRB(13, 10, 0, 12),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(13, 10, 0, 12),
                           labelText: 'Please Enter Your Password',
                           suffixIcon: Image.asset('assets/images/show.png'),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5))),
+
+                       enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(5),borderSide: const BorderSide(color: Color(0XFFC6C6C6))),
+                        focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Color(0XFFC6C6C6)))
+
+                      ),
+
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Password is required';
-                        } else if (!RegExp(
-                                r'^().{8,}$')
-                            .hasMatch(password)) {
+                        } else if (!RegExp(r'^().{8,}$').hasMatch(password)) {
                           return 'At least 8 char needed';
                         } else {
                           return null;
@@ -164,15 +168,15 @@ and set the main axis alignment to spaceBetween.
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              border: Border.all(color: const Color(0XFFCDD1E0)),
-                            borderRadius: BorderRadius.circular(5)
-                          ),
+                              border:
+                                  Border.all(color: const Color(0XFFCDD1E0)),
+                              borderRadius: BorderRadius.circular(5)),
                           height: 20,
                           width: 20,
-                          child: 
-                          Checkbox(
+                          child: Checkbox(
                               value: isChecked,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5)),
                               checkColor: const Color(0XFF000C14),
                               activeColor: const Color(0XFFFFFFFF),
                               onChanged: (bool? value) {
@@ -210,17 +214,21 @@ and set the main axis alignment to spaceBetween.
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-
                                 borderRadius: BorderRadius.circular(5)),
                             backgroundColor: const Color(0XFF351A96)),
                         onPressed: () {
                           _loginFormKey.currentState!.save();
                           _loginFormKey.currentState!.validate();
-                          if(_loginFormKey.currentState!.validate() == true){
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Center(child: Text('Login successful'))));
-                          }
-                          else{
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Center(child: Text('Login failed'))));
+                          if (_loginFormKey.currentState!.validate() == true) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Center(
+                                        child: Text('Login successful'))));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Center(child: Text('Login failed'))));
                           }
                         },
                         child: const Center(child: Text('Login')))),
@@ -229,13 +237,22 @@ and set the main axis alignment to spaceBetween.
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Don\'t have an account?'),
-                    SizedBox(width: 9,),
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(color: Color(0XFF160062)),
-                    )
+                  children: [
+                    Text('Don\'t have an account?',
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.manrope().fontFamily,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: const Color(0XFF999EA1))),
+                    const SizedBox(
+                      width: 9,
+                    ),
+                    Text('Sign Up',
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.manrope().fontFamily,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: const Color(0XFF160062)))
                   ],
                 )
               ],
