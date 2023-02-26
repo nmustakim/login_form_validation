@@ -99,8 +99,8 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         }
                       },
-                      onSaved: (String? value) {
-                        email = value ?? '';
+                      onSaved: (String? newValue) {
+                        email = newValue ?? '';
                       },
                     ),
                   ),
@@ -143,8 +143,8 @@ class _LoginFormState extends State<LoginForm> {
                           return null;
                         }
                       },
-                      onSaved: (String? value) {
-                        password = value ?? '';
+                      onSaved: (String? newValue) {
+                        password = newValue ?? '';
                       },
                     ),
                   ),
