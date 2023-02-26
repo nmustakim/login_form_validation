@@ -185,7 +185,7 @@ and set the main axis alignment to spaceBetween.
                           width: 7,
                         ),
                         Text(
-                          'Remember me',
+                          'Remember Me',
                           style: TextStyle(
                               fontFamily: GoogleFonts.manrope().fontFamily,
                               fontSize: 14,
