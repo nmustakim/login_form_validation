@@ -10,7 +10,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
-  String email = 'sophat.leat@nintrea.live';
+  String email = '';
   String password = '';
   bool isChecked = true;
   @override
@@ -78,29 +78,33 @@ class _LoginFormState extends State<LoginForm> {
                   height: 7,
                 ),
                 SizedBox(
-                    height: 41,
+                  height: 41,
+                  child: Center(
                     child: TextFormField(
+                      maxLines: 1,
+                      initialValue: 'sophat.leat@nintrea.live',
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                          errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5)),
+                        contentPadding: const EdgeInsets.fromLTRB(13, 10, 0, 12),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5))),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Email is required';
-                        }
-                        if (!RegExp(
+                        } else if (!RegExp(
                                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                             .hasMatch(email)) {
                           return 'Email is invalid';
+                        } else {
+                          return null;
                         }
-                        return null;
                       },
                       onSaved: (String? value) {
                         email = value ?? '';
                       },
-                    )),
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 12,
                 ),
@@ -116,11 +120,14 @@ class _LoginFormState extends State<LoginForm> {
                   height: 7,
                 ),
                 SizedBox(
-                    height: 41,
+                  height: 41,
+                  child: Center(
                     child: TextFormField(
+                      maxLines: 1,
                       obscureText: true,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.fromLTRB(13, 10, 0, 12),
                           labelText: 'Please Enter Your Password',
                           suffixIcon: Image.asset('assets/images/show.png'),
                           border: OutlineInputBorder(
@@ -128,42 +135,46 @@ class _LoginFormState extends State<LoginForm> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Password is required';
-                        }
-                        if (RegExp(
-                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                        } else if (!RegExp(
+                                r'^().{8,}$')
                             .hasMatch(password)) {
-                          return 'Invalid password';
+                          return 'At least 8 char needed';
+                        } else {
+                          return null;
                         }
-                        return null;
                       },
                       onSaved: (String? value) {
                         password = value ?? '';
                       },
-                    )),
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 17,
                 ),
                 Row(
 /*If I use the gap between 'remember me' and 'forgot password' as the figma design ,
 the screen overflows to the right that's why I've used row inside row
-and set the main axis alignment to spacebetween.
+and set the main axis alignment to spaceBetween.
  */
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: const EdgeInsets.fromLTRB(4, 6, 5, 4),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5)),
+                              border: Border.all(color: const Color(0XFFCDD1E0)),
+                            borderRadius: BorderRadius.circular(5)
+                          ),
                           height: 20,
                           width: 20,
-                          child: Checkbox(
+                          child: 
+                          Checkbox(
                               value: isChecked,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                               checkColor: const Color(0XFF000C14),
                               activeColor: const Color(0XFFFFFFFF),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
                               onChanged: (bool? value) {
                                 setState(() {
                                   isChecked = value!;
@@ -199,11 +210,15 @@ and set the main axis alignment to spacebetween.
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
+
                                 borderRadius: BorderRadius.circular(5)),
                             backgroundColor: const Color(0XFF351A96)),
                         onPressed: () {
                           _loginFormKey.currentState!.save();
                           _loginFormKey.currentState!.validate();
+                          if(_loginFormKey.currentState!.validate() == true){
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Login successful')));
+                          }
                         },
                         child: const Center(child: Text('Login')))),
                 const SizedBox(
@@ -211,14 +226,13 @@ and set the main axis alignment to spacebetween.
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Don\'t have an account?'),
-                    TextButton(
-                        onPressed: () => null,
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(color: Color(0XFF160062)),
-                        ))
+                  children: const [
+                    Text('Don\'t have an account?'),
+                    SizedBox(width: 9,),
+                    Text(
+                      'Sign Up',
+                      style: TextStyle(color: Color(0XFF160062)),
+                    )
                   ],
                 )
               ],
