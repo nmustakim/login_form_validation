@@ -225,7 +225,7 @@ and set the main axis alignment to spaceBetween.
                         },
                         child: const Center(child: Text('Login')))),
                 const SizedBox(
-                  height: 195,
+                  height: 191,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
