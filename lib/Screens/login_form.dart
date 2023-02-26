@@ -217,7 +217,10 @@ and set the main axis alignment to spaceBetween.
                           _loginFormKey.currentState!.save();
                           _loginFormKey.currentState!.validate();
                           if(_loginFormKey.currentState!.validate() == true){
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Login successful')));
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Center(child: Text('Login successful'))));
+                          }
+                          else{
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Center(child: Text('Login failed'))));
                           }
                         },
                         child: const Center(child: Text('Login')))),
